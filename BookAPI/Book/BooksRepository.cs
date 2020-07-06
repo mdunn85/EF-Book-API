@@ -15,7 +15,14 @@ namespace BookAPI.Book
         {
             connectionString = config["ConnectionString"];
         }
-        
+
+        /// <summary>
+        /// Get all books
+        /// </summary>
+        /// <returns>
+        /// List of books
+        /// </returns>
+
         public async Task<IEnumerable<Book>> ListAsync()
         {
             IEnumerable<Book> books = new List<Book>();
@@ -26,6 +33,14 @@ namespace BookAPI.Book
             }
             return books;
         }
+
+        /// <summary>
+        /// Get a book
+        /// </summary>
+        /// <param name="isbn"></param>
+        /// <returns>
+        /// A book
+        /// </returns>
 
         public async Task<Book> GetAsync(string isbn)
         {
@@ -41,6 +56,14 @@ namespace BookAPI.Book
             return book;
         }
 
+        /// <summary>
+        /// Inserts a book
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns>
+        /// The inserted book or null on failure
+        /// </returns>
+
         public async Task<Book> InsertAsync(Book book)
         {
             int affectedRows;
@@ -53,6 +76,15 @@ namespace BookAPI.Book
             return affectedRows > 0 ? book : null;
         }
 
+        /// <summary>
+        /// Update a book
+        /// </summary>
+        /// <param name="isbn"></param>
+        /// <param name="book"></param>
+        /// <returns>
+        /// ture or false depending if book was updated
+        /// </returns>
+
         public async Task<bool> UpdateAsync(string isbn, Book book)
         {
             int affectedRows;
@@ -64,6 +96,14 @@ namespace BookAPI.Book
             }
             return affectedRows > 0;
         }
+
+        /// <summary>
+        /// Delete a book
+        /// </summary>
+        /// <param name="isbn"></param>
+        /// <returns>
+        /// ture or false depending if book was deleted
+        /// </returns>
 
         public async Task<bool> DeleteAsync(string isbn)
         {

@@ -16,6 +16,13 @@ namespace BookAPI.Book
             _booksRepository = bookRepository;
         }
 
+        /// <summary>
+        /// Get all books
+        /// </summary>
+        /// <returns>
+        /// list of books
+        /// </returns>
+
         [HttpGet]
         public async Task<IActionResult> List()
         {
@@ -28,6 +35,14 @@ namespace BookAPI.Book
                 return Problem(e.Message, statusCode: 500);
             }
         }
+
+        /// <summary>
+        /// Get a book by ISBN number
+        /// </summary>
+        /// <param name="isbn"></param>
+        /// <returns>
+        /// A book or 404 if not found
+        /// </returns>
 
         [HttpGet("{isbn}")]
         public async Task<IActionResult> Get([FromRoute] string isbn)
@@ -50,6 +65,14 @@ namespace BookAPI.Book
             }
         }
 
+        /// <summary>
+        /// Create a new book
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns>
+        /// 201 on success with created book
+        /// </returns>
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Book book)
         {
@@ -67,6 +90,15 @@ namespace BookAPI.Book
             }
         }
 
+        /// <summary>
+        /// Update a book
+        /// </summary>
+        /// <param name="isbn"></param>
+        /// <param name="book"></param>
+        /// <returns>
+        /// 200 on success
+        /// </returns>
+
         [HttpPut("{isbn}")]
         public async Task<IActionResult> Update([FromRoute] string isbn, [FromBody] Book book)
         {
@@ -83,6 +115,14 @@ namespace BookAPI.Book
                 return Problem(e.Message, statusCode: 500);
             }
         }
+
+        /// <summary>
+        /// Deteles a book
+        /// </summary>
+        /// <param name="isbn"></param>
+        /// <returns>
+        /// 200 on success
+        /// </returns>
 
         [HttpDelete("{isbn}")]
         public async Task<IActionResult> Delete([FromRoute] string isbn)
