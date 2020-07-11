@@ -1,7 +1,7 @@
 ﻿using System;
 using MySql.Data.MySqlClient;
 
-namespace BookAPI.Config
+namespace BookAPI.Database
 {
     public class MySqlDatabase : IDisposable
     {

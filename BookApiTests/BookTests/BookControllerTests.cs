@@ -17,15 +17,15 @@ namespace BookApiTests.BookTests
             {
                 new Book()
                 {
-                    Author = "a1",
-                    Title = "t1",
-                    ISBN = "i1",
+                    Author = "Test Author 1",
+                    Title = "Test Title 1",
+                    ISBN = "Test ISBN 1"
                 },
                 new Book()
                 {
-                    Author = "a2",
-                    Title = "t2",
-                    ISBN = "i2",
+                    Author = "Test Author 2",
+                    Title = "Test Title 2",
+                    ISBN = "Test ISBN 2"
                 }
             };
             mockRepo
@@ -48,9 +48,9 @@ namespace BookApiTests.BookTests
         {
             Book book = new Book()
             {
-                Author = "a1",
-                Title = "t1",
-                ISBN = "i1",
+                Author = "Test Author 1",
+                Title = "Test Title 1",
+                ISBN = "Test ISBN 1"
             };
             Mock<IBooksRepository> mockRepo = new Mock<IBooksRepository>();
             mockRepo.Setup(repo => repo.InsertAsync(book)).ReturnsAsync(book);
@@ -82,9 +82,9 @@ namespace BookApiTests.BookTests
         {
             Book book = new Book()
             {
-                Author = "a1",
-                Title = "t1",
-                ISBN = "i1",
+                Author = "Test Author 1",
+                Title = "Test Title 1",
+                ISBN = "Test ISBN 1"
             };
             Mock<IBooksRepository> mockRepo = new Mock<IBooksRepository>();
             mockRepo.Setup(repo => repo.GetAsync("i1")).ReturnsAsync(book);
@@ -113,9 +113,9 @@ namespace BookApiTests.BookTests
         {
             Book book = new Book()
             {
-                Author = "a1",
-                Title = "t1",
-                ISBN = "i1",
+                Author = "Test Author 1",
+                Title = "Test Title 1",
+                ISBN = "Test ISBN 1"
             };
             Mock<IBooksRepository> mockRepo = new Mock<IBooksRepository>();
             mockRepo.Setup(repo => repo.UpdateAsync("i1", book)).ReturnsAsync(true);

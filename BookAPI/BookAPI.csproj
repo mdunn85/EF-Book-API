@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <Folder Include="Book\" />
-    <Folder Include="Config\" />
+    <Folder Include="Database\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>

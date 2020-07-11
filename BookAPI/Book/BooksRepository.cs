@@ -1,6 +1,5 @@
-﻿using Dapper;
-using Microsoft.Extensions.Configuration;
-using MySql.Data.MySqlClient;
+﻿using BookAPI.Database;
+using Dapper;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,11 +8,11 @@ namespace BookAPI.Book
 {
     public class BooksRepository : IBooksRepository
     {
-        private readonly string connectionString;
+        private IDbConnectionFactory connectionFactory;
 
-        public BooksRepository(IConfiguration config)
+        public BooksRepository(IDbConnectionFactory connectionFactory)
         {
-            connectionString = config["ConnectionString"];
+            this.connectionFactory = connectionFactory;
         }
 
         /// <summary>
@@ -27,7 +26,7 @@ namespace BookAPI.Book
         {
             IEnumerable<Book> books = new List<Book>();
             string sql = "SELECT * FROM `books`";
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (var connection = connectionFactory.CreateConnection())
             {
                 books = await connection.QueryAsync<Book>(sql);
             }
@@ -48,7 +47,7 @@ namespace BookAPI.Book
 
             string sql = "SELECT * FROM books WHERE isbn = @ISBN;";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (var connection = connectionFactory.CreateConnection())
             {
                 IEnumerable<Book> books = await connection.QueryAsync<Book>(sql, new { ISBN = isbn });
                 book = books.Count() > 0 ? books.First() : null;
@@ -69,7 +68,7 @@ namespace BookAPI.Book
             int affectedRows;
             string sql = "INSERT INTO books (isbn,title,author) Values (@ISBN, @Title, @Author);";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (var connection = connectionFactory.CreateConnection())
             {
                 affectedRows = await connection.ExecuteAsync(sql, book);
             }
@@ -90,7 +89,7 @@ namespace BookAPI.Book
             int affectedRows;
             string sql = "UPDATE books SET title = @Title, author = @Author WHERE isbn = @ISBN;";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (var connection = connectionFactory.CreateConnection())
             {
                 affectedRows = await connection.ExecuteAsync(sql, new { ISBN = isbn, book.Author, book.Title });
             }
@@ -110,7 +109,7 @@ namespace BookAPI.Book
             int affectedRows;
             string sql = "DELETE from books WHERE isbn = @ISBN;";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (var connection = connectionFactory.CreateConnection())
             {
                 affectedRows = await connection.ExecuteAsync(sql, new { ISBN = isbn });
             }
