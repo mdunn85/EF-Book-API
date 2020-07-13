@@ -20,6 +20,7 @@
   <ItemGroup>
     <Content Remove="out\BookAPI.runtimeconfig.json" />
     <Content Remove="out\BookAPI.runtimeconfig.json" />
+    <Content Remove="appsettings.Testing" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Book\IBookRepository.cs" />
